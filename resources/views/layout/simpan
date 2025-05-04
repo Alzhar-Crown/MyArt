@@ -1,0 +1,44 @@
+<form class="act" action="{{ route('user.store') }}" method="POST">
+  @csrf
+  <div class="l">
+
+      <label for="">Username</label>
+      <input type="text" placeholder="ex : Alzhar" name="username" value="{{ old('username') }}">
+      <label for="">Password</label>
+      <input type="text" placeholder="MIN 5 CHR !0 in front, ex :23456" name="password"
+          value="{{ old('password') }}">
+      <a href="{{ url('/Login') }}">Already Have an Account?</a>
+      <div class="cta&bckn">
+          <div class="cta">
+              <span>Sure?</span>
+              <button type="submit">Next</button>
+          </div>
+          <div class="prev">
+              <a href="{{ url('/') }}" style="font-size: 26px;">
+                  < </a>
+                      <a href="">></a>
+          </div>
+      </div>
+      @if ($errors->any())
+          <div class ="alert alert-danger" style="margin-left:-23px">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li style="color:red; font-size:17px">{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
+
+  </div>
+  <div class="p">
+      <div class="pi">
+          <img src="{{ asset('images/progres1.png') }}" alt="MyArtLogo">
+
+      </div>
+      <div class="pin">
+          <div class="box1"></div>
+          <div class="box2"></div>
+          <div class="box3"></div>
+      </div>
+  </div>
+</form>
