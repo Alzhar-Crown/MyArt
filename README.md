@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -59,3 +60,29 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# MyArt
+# 🛒 E-Commerce Website (Laravel + TailwindCSS)
+
+Ini adalah proyek **website e-commerce** yang sedang saya kembangkan menggunakan **Laravel 12** dan **Tailwind CSS**. Website ini dirancang untuk menjadi platform penjualan produk digital atau fisik, dengan tampilan modern dan fungsionalitas yang lengkap.
+
+## 🚀 Fitur Utama
+
+- 🔍 Pencarian produk & akun
+- 🖼️ Carousel/Slider dengan Swiper.js
+- 🛍️ Halaman portofolio & toko
+- 👤 Manajemen akun pengguna (login/logout)
+- menyusul
+  
+
+## 🧱 Teknologi yang Digunakan
+
+- **Laravel 12**
+- **Tailwind CSS**
+- **Swiper.js**
+- **Google Fonts + Material Symbols**
+- **Blade Templating**
+- **Admin LTE**
+
+
+>>>>>>> cbc43da37389fb7cf044f42f11e221aeb8c23b54
