@@ -58,7 +58,8 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
-        ]
+        ],    "build": "npm run build && php artisan migrate --force"
+
     },
     "extra": {
         "laravel": {
