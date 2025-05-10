@@ -38,10 +38,14 @@ class ControllerUser extends Controller
         // });
     
         if (Auth::check()) {
-            $profil = Profil::where('id', 1)->firstOrFail();
+            $profil = Profil::where('user_id', Auth::user()->id)->firstOrFail();
             session()->put('dataProfil', [
+                'user_id'=>$profil->user_id,
                 'nama_depan' => $profil->nama_depan,
-                'nama_belakang' => $profil->nama_belakang
+                'nama_belakang' => $profil->nama_belakang,
+                'foto_profil' => $profil->foto_profil,
+                'headline' => $profil->headline,
+                'deskripsi' => $profil->deskripsi
             ]);
 
             return $this->home();
@@ -135,10 +139,14 @@ class ControllerUser extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // prevent session fixation
-            $profil = Profil::where('id', 1)->firstOrFail();
+            $profil = Profil::where('user_id', Auth::user()->id)->firstOrFail();
             session()->put('dataProfil', [
+                'user_id'=>$profil->user_id,
                 'nama_depan' => $profil->nama_depan,
-                'nama_belakang' => $profil->nama_belakang
+                'nama_belakang' => $profil->nama_belakang,
+                'foto_profil' => $profil->foto_profil,
+                'headline' => $profil->headline,
+                'deskripsi' => $profil->deskripsi
             ]);
             return redirect()->intended('/home');
         }

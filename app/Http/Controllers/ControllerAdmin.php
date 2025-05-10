@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalog;
+use App\Models\Portofolio;
 use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,6 +32,26 @@ class ControllerAdmin extends Controller
 
         $daftarProfil = Profil::all();
         return view('admin.dash-profil', ['daftar_profil' => $daftarProfil]);
+    }
+    public function indexPortofolio()
+    {
+        //
+        if (!session('adminlogin')) {
+            return view('admin.login');
+        }
+
+        $daftarPorto = Portofolio::all();
+        return view('admin.dash-portofolio', ['daftar_porto' => $daftarPorto]);
+    }
+    public function indexCatalog()
+    {
+        //
+        if (!session('adminlogin')) {
+            return view('admin.login');
+        }
+
+        $daftarCatalog = Catalog::all();
+        return view('admin.dash-catalog', ['daftar_catalog' => $daftarCatalog]);
     }
     public function showLoginForm()
     {
@@ -112,4 +134,18 @@ class ControllerAdmin extends Controller
         return redirect()->route('admin.index');
         //
     }
+    public function destroyPorto(string $id)
+    {
+        Portofolio::destroy($id);
+        return redirect()->route('admin.index');
+        //
+    }
+    public function destroyCatal(string $id)    
+    {
+        Catalog::destroy($id);
+        return redirect()->route('admin.index');
+        //
+    }
 }
+    
+

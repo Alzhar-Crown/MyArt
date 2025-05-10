@@ -237,6 +237,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>Management Profil</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('index.porto')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Management Portofolio</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('index.catalog')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Management Catalog</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
