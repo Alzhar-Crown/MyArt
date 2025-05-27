@@ -224,7 +224,7 @@
         <source src="{{ asset('video/bgbg.mp4') }}" type="video/mp4">
         {{-- Your browser does not support HTML5 video. --}}
     </video>
-    <div class="base">
+    <div class="base">  
         <div class="logo">
             <img src="{{ asset('images/logo.png') }}" alt="MyArtLogo">
             <span>Make a Contribute</span>

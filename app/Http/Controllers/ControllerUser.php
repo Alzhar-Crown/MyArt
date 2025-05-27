@@ -148,7 +148,7 @@ class ControllerUser extends Controller
                 'headline' => $profil->headline,
                 'deskripsi' => $profil->deskripsi
             ]);
-            return redirect()->intended('/home');
+            return redirect()->intended(route('home.index'));
         }
         $BaseData = User::where('username', $request['username'])->first();
         if (!$BaseData) {

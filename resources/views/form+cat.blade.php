@@ -43,7 +43,7 @@
             </div>
             <div class="flex flex-row gap-3  w-fit">
                 <div>
-                    <label class="text-black ">Harga :</label>
+                    <label class="text-black ">Price :</label>
                     <input class="rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3"
                         type="text" name="harga" required></input>
                 </div>
@@ -56,8 +56,7 @@
                         class="w-full px-4 bg-white text-black py-2 border rounded" required>
                         <option value="">-- Pilih Kategori --</option>
                         <option value="ui/ux">Ui/Ux Design</option>
-                        <option value="typhografi">Typhografi</option>
-                        <option value="poster">Poster</option>
+                        <option value="realpic">Real Picture</option>
                         <option value="2d illustration">2D Illustration</option>
                         <option value="3d illustration">3D Illustration</option>
                     </select>

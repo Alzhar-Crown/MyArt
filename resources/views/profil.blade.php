@@ -4,6 +4,21 @@
 @endphp
 @extends('layout.navbar')
 @section('main')
+    {{-- @if (!empty($catalog))
+        <h2>pHash (64 bit)</h2>
+        <code>{{ $catalog->preceptual_hash }}</code>
+
+        <h2>Visualisasi Hash</h2>
+        <div style="display: grid; grid-template-columns: repeat(8, 20px); width: 160px;">
+            @foreach (str_split($catalog->preceptual_hash) as $bit)
+                <div
+                    style="width: 20px; height: 20px; background-color: {{ $bit == '1' ? '#000' : '#fff' }}; border: 1px solid #ccc;">
+                </div>
+            @endforeach
+        </div>
+    @endif --}}
+
+
     <div class="flex flex-col   w-full h-fit  mt-5">
         @if (session('dataProfil'))
             <h2 class="text-black font-semibold text-[25px] font-ptsans mx-auto"> {{ session('dataProfil')['nama_depan'] }}
@@ -54,8 +69,7 @@
         <div class=" flex flex-row mt-5  justify-around">
             <div class="flex flex- gap-4 row justify-center items-center">
                 @if (session('dataPortofolio'))
-                    <a class="text-yellow-400 font-ptsans font-semibold "
-                        href="{{ route('clearProfil') }}">Portofolio</a>
+                    <a class="text-yellow-400 font-ptsans font-semibold " href="{{ route('clearProfil') }}">Portofolio</a>
                 @else
                     <a class="text-black font-ptsans font-semibold" href="{{ route('clearProfil') }}">Portofolio</a>
                 @endif
@@ -86,15 +100,21 @@
             <div class="flex flex-wrap  gap-4 ">
                 @if (session('dataPortofolio'))
                     @foreach ($portofolio as $item)
-                        <a href=""
+                        <a href="{{ route('porsow',['id'=>$item->id]) }}"
                             class=" p-4 h-[250px] object-center  overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
                                 src="{{ asset('portofolio/' . $item->preview) }}"></img></a>
                     @endforeach
                 @elseif (session('dataCatalog'))
                     @foreach ($catalog as $item)
-                        <a href=""
-                            class=" p-4 h-[250px] object-center  overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
-                                src="{{ asset('catalog/' . $item->preview) }}"></img></a>
+                        @if ($item->status == 'sold')
+                            <a href="{{ route('shower', ['id' => $item->id]) }}"
+                                class=" p-4 h-[250px] object-center text-red-500 overflow-y-hidden font-bold  object-cover w-[calc(100%/3-1rem)] mt-10">ITEM
+                                SOLD<img src="{{ asset('catalog/preview/' . $item->preview) }}"></img></a>
+                        @else
+                            <a href="{{ route('shower', ['id' => $item->id]) }}"
+                                class=" p-4 h-[250px] object-center text-black overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
+                                    src="{{ asset('catalog/preview/' . $item->preview) }}"></img></a>
+                        @endif
                     @endforeach
                 @else
                     <span class="text-black text-[15px] mx-auto">No item found</item>

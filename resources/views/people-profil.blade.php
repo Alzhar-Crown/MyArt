@@ -49,7 +49,7 @@
                     @if (session('dataCatalog'))
                         <a class="text-black font-ptsans font-semibold" href="{{ route('searchProfil') }}">Portofolio</a>
                     @else
-                        <a class="text-black font-ptsans font-semibold">Portofolio</a>
+                        <a class="text-blackfont-ptsans font-semibold" href="{{ route('searchProfil') }}">Portofolio</a>
                     @endif
                 @endif
             </div>
@@ -60,7 +60,7 @@
                     @if (session('dataPortofolio'))
                         <a class="text-black font-ptsans font-semibold" href="{{ route('searchCatalog') }}">Catalog</a>
                     @else
-                        <a class="text-black font-ptsans font-semibold">Catalog</a>
+                        <a class="text-black font-ptsans font-semibold"href="{{ route('searchCatalog') }}">Catalog</a>
                     @endif
                 @endif
             </div>
@@ -74,16 +74,21 @@
             <div class="flex flex-wrap  gap-4 ">
                 @if (session()->has('dataPortofolio') && !empty($portofolio))
                     @foreach ($portofolio as $item)
-                        <a href=""
+                        <a href="{{ route('porsp',['id' => $item->id]) }}"
                             class=" p-4 h-[250px] object-center  overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
                                 src="{{ asset('portofolio/' . $item->preview) }}"></a>
-                        kk
                     @endforeach
                 @elseif (session()->has('dataCatalog') && !empty($catalog))
                     @foreach ($catalog as $item)
-                        <a href=""
-                            class=" p-4 h-[250px] object-center  overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
-                                src="{{ asset('catalog/' . $item->preview) }}"></a>
+                        @if ($item->status == 'sold')
+                            <a href="{{ route('catalog.show', ['catalog' => $item->id]) }}"
+                                class=" p-4 h-[250px] object-center text-red-500 overflow-y-hidden font-bold  object-cover w-[calc(100%/3-1rem)] mt-10">ITEM
+                                SOLD<img src="{{ asset('catalog/preview/' . $item->preview) }}"></img></a>
+                        @else
+                            <a href="{{ route('showing', ['id' => $item->id]) }}"
+                                class=" p-4 h-[250px] object-center text-black overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
+                                    src="{{ asset('catalog/preview/' . $item->preview) }}"></img></a>
+                        @endif
                     @endforeach
                 @else
                     <span class="text-black text-[15px] mx-auto">No item found</item>

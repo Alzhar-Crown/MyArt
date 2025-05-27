@@ -44,6 +44,14 @@ class ControllerPortofolio extends Controller
         return view('portofolio', compact('categorized'));
     }
 
+    public function sporto($kategori)
+    {
+        $porto = Portofolio::where('kategori_desain', $kategori)->get();
+
+
+
+        return view('sporto', compact('porto'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -95,8 +103,12 @@ class ControllerPortofolio extends Controller
      */
     public function show(string $id)
     {
+        $porto = Portofolio::where('id', $id)->first();
+        return view('showPorto', compact('porto'));
         //
     }
+
+  
 
     /**
      * Show the form for editing the specified resource.

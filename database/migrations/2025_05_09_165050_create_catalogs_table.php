@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
-             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('_user')->onDelete('cascade');
             $table->string('nama_depan',30);
             $table->longText('preview');

@@ -17,18 +17,19 @@ class ControllerSearch extends Controller
     {
         if (Str::contains($request['search_input'], '@')) {
             session()->forget('dataCatalog');
+            session()->forget('nd');
             session()->forget('dataPortofolio');
 
             $input = ltrim($request['search_input'], '@');
             $profil = Profil::where('nama_depan', $input)->first();
             $portofolio = Portofolio::where('nama_depan', $input)->get();
             // dd($portofolio);
+            session()->put('nd', [
+                'nama_depan' => $input,
+            ]);
             if ($portofolio->isNotEmpty()) {
                 session()->put('dataPortofolio', [
                     'user_id' => Auth::id(),
-                ]);
-                session()->put('nd', [
-                    'nama_depan' => $input,
                 ]);
                 return view('people-profil', compact('profil', 'portofolio'));
             } else {
@@ -70,4 +71,37 @@ class ControllerSearch extends Controller
             return view('people-profil', compact('profil'));
         }
     }
-}
+    public function shows($id)
+    {
+        $profil = Profil::where('user_id',$id)->first();
+        $portofolio = Portofolio::where('user_id', $id)->get();
+            // dd($portofolio);
+            if ($portofolio->isNotEmpty()) {
+                session()->put('dataPortofolio', [
+                    'user_id' => Auth::id(),
+                ]);
+                session()->put('nd', [
+                    'nama_depan' => $profil->nama_depan,
+                ]);
+                return view('people-profil', compact('profil', 'portofolio'));
+            } else {
+                return view('people-profil', compact('profil'));
+            }
+
+    }
+     public function showitem(string $id)
+    {
+        $catal = Catalog::where('id', $id)->first();
+        if ($catal->status == 'sold') {
+            return view('showSold', compact('catal'));
+        }
+        return view('profilCatal', compact('catal'));
+        //
+    }
+
+    
+    public function portows (string $id){
+        $porto = Portofolio::where('id', $id)->first();
+        return view('showpeopleP', compact('porto'));
+    }
+}  

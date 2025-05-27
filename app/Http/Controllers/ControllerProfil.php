@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalog;
+use App\Models\Portofolio;
 use App\Models\Profil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -109,7 +111,7 @@ class ControllerProfil extends Controller
             }
             $profil->foto_profil = $namaFile;
         }
-        
+
         $profil->nama_depan = $request['nama_depan'];
         $profil->nama_belakang = $request['nama_belakang'];
         $profil->headline = $request['headline'];
@@ -135,6 +137,21 @@ class ControllerProfil extends Controller
 
         ]);
         return view('profil');
+    }
+
+    public function showitem(string $id)
+    {
+        $catal = Catalog::where('id', $id)->first();
+        if ($catal->status == 'sold') {
+            return view('myprofil.soldProfil', compact('catal'));
+        }
+        return view('myprofil.readyProfil', compact('catal'));
+        //
+    }
+
+    public function portows (string $id){
+        $porto = Portofolio::where('id', $id)->first();
+        return view('myprofil.portoSw', compact('porto'));
     }
 
     /**
