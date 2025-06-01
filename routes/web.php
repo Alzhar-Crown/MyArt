@@ -20,19 +20,13 @@ use App\Livewire\ShowThread;
 
 
 
-use Pusher\Pusher;
-
-Route::get('/test-pusher', function () {
-    $pusher = new Pusher('key', 'secret', 'app_id', ['cluster' => 'ap1']);
-    return 'Pusher instance created';
-});
 
 // web.php
 
 Route::get('/Login', function () {
     return view('formLogn');
 });
-
+    
 Route::get('/myprofil', function () {
     return view('profil');
 });
@@ -45,6 +39,7 @@ Route::get('/portows/{id}', [ControllerProfil::class, 'portows'])->name('porsow'
 // })->middleware('auth');
 
 Route::resource('home', ControllerHome::class)->middleware('auth');
+Route::get('back', [ControllerHome::class, 'back'])->name('back');
 
 
 Route::get('/detailp', [ControllerPayment::class, 'detailp'])->name('detailPayment');
@@ -53,9 +48,10 @@ Route::get('/notification', [ControllerPayment::class, 'notification'])->name('n
 
 Route::get('/searchProfil', [ControllerSearch::class, 'ClearProfil'])->name('searchProfil');
 Route::get('/searchCatalog', [ControllerSearch::class, 'ClearCatalog'])->name('searchCatalog');
+Route::get('indexsearch', [ControllerSearch::class, 'indexseaarch'])->name('indexsearch');
 Route::get('/shows/{id}', [ControllerSearch::class, 'shows'])->name('shows');
 Route::get('/showing/{id}', [ControllerSearch::class, 'showitem'])->name('showing');
-Route::get('/showpor/{id}', [ControllerSearch::class, 'portows'])->name('porsp');
+Route::get  ('/showpor/{id}', [ControllerSearch::class, 'portows'])->name('porsp');
 
 
 

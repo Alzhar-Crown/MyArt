@@ -33,7 +33,8 @@ class CommentSection extends Component
     public function render()
     {
         return view('livewire.comment-section', [
-            'comments' => $this->thread->comments()->latest()->get()
+            'comments' => $this->thread->comments()->latest()->get(),
+            'thread'=>$this->thread
         ]);
     }
 }

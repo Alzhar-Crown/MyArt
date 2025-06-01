@@ -60,6 +60,10 @@ class ControllerHome extends Controller
         return view('home', compact('categorized', 'portofolios'));
     }
 
+    public function back(){
+        return redirect(session('previous_url', '/'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

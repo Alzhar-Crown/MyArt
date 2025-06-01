@@ -104,6 +104,7 @@ class ControllerPortofolio extends Controller
     public function show(string $id)
     {
         $porto = Portofolio::where('id', $id)->first();
+        session(['previous_url' => url()->previous()]);
         return view('showPorto', compact('porto'));
         //
     }

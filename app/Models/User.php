@@ -19,10 +19,13 @@ class User extends Authenticatable
     public function threads()
     {
         return $this->hasMany(Thread::class);
-    }   
+    }
+    public function ordered()
+    {
+        return $this->hasMany(Ordered::class, 'user_id');
+    }
 
-
-    public function profil()
+    public function profil()    
     {
         return $this->hasOne(Profil::class);
     }
@@ -32,7 +35,7 @@ class User extends Authenticatable
     }
     public function portofolio()
     {
-        return $this->hasMany(Portofolio::class, 'user_id');
+        return $this->hasMany(Portofolio::class);
     }
     public function Catalog()
     {

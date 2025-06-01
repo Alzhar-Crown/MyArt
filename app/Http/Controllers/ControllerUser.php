@@ -62,8 +62,8 @@ class ControllerUser extends Controller
 
     public function index()
     {
-        $listUser = User::all();
-        return $listUser;
+        $user = User::find(Auth::id());
+        return view('account',compact('user'));
         //
     }
     public function showlogin()
@@ -204,7 +204,7 @@ class ControllerUser extends Controller
     {
         //
         $request->validate([
-            'username' => 'required|unique:_user,username|max:25',
+            'username' => 'required|max:25',
             'password' => 'required|min:5|max:10'
         ]);
         if (session('user_data')) {
@@ -226,8 +226,9 @@ class ControllerUser extends Controller
         } else {
             $user = user::find($id);
             $user->username = $request['username'];
-            $user->password = $request['password'];
+            $user->password = Hash::make($request['password']);
             $user->save();
+            return redirect()->back()->with('user',$user)->with('succes',true);
         }
     }
 

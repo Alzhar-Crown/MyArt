@@ -333,6 +333,7 @@ class ControllerCatalog extends Controller
         if ($catal->status == 'sold') {
             return view('showSold', compact('catal'));
         }
+        session(['previous_url' => url()->previous()]);
         return view('showCatal', compact('catal'));
         //
     }   

@@ -16,7 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -62,11 +62,19 @@
                         class="text-[rgba(115,159,99,1)] hover:underline translate-y-2">Discussion</a>
 
                     <div class="si ">
-                        <form class="flex-grow max-w-xs" action="search" method="post">
+                        <form class="flex-grow max-w-xs" action="search" method="POST">
                             @csrf
-                            <input type="text"
-                                class="bg-white focus:outline focus:outline-[rgba(115,159,99,1)] focus:w-[200px] transition-all duration-300 ease-in-out outline outline-1 outline-black p-1 rounded-sm placeholder:text-[10px] text-[12px] placeholder:text-left text-black placeholder-black"
-                                placeholder="What Are you looking for?" list="productList" name="search_input" required>
+                            @if ($errors->has('search'))
+                                <input type="text"
+                                    class="bg-white focus:outline focus:outline-[rgba(115,159,99,1)] focus:w-[200px] transition-all duration-300 ease-in-out outline outline-1 outline-black p-1 rounded-sm placeholder:text-[10px] text-[12px] placeholder:text-left text-black placeholder-black"
+                                    placeholder="{{ $errors->first('search') }}" list="productList" name="search_input"
+                                    required>
+                            @else
+                                <input type="text"
+                                    class="bg-white focus:outline focus:outline-[rgba(115,159,99,1)] focus:w-[200px] transition-all duration-300 ease-in-out outline outline-1 outline-black p-1 rounded-sm placeholder:text-[10px] text-[12px] placeholder:text-left text-black placeholder-black"
+                                    placeholder="What Are you looking for?" list="productList" name="search_input"
+                                    required>
+                            @endif
                             <datalist id="productList">
                                 <option value="ui/ux">
                                 <option value="2d illustration">
@@ -78,13 +86,16 @@
                             <button type="submit"><span
                                     class="material-symbols-outlined text-black text-[12px] ml-3  focus:outline  outline outline-1 outline-black  translate-y-2 -translate-x-2 rounded-sm bg-white py-0 ">search</span></button>
                         </form>
+
+
                     </div>
 
+
                     <div class="manage flex items-center space-x-2 relative">
-                        <a href='#' class=" translate-y-1.5 -translate-x-12 absolute left-0"><span
+                        <a href='{{ route('user.index') }}' class=" translate-y-1.5 -translate-x-12 absolute left-0"><span
                                 class="material-symbols-outlined text-[30px] text-black">manage_accounts</span></a>
                         <span
-                            class="text-black text-[12px] translate-y-1.5 -translate-x-6 absolute left-0 ">Setting</span>
+                            class="text-black text-[12px] translate-y-1.5 -translate-x-6 absolute left-0 ">Account</span>
                     </div>
                     <a href="{{ route('cart.index') }}" class="manage flex items-center space-x-2 relative">
                         <button class="translate-y-1 -translate-x-10 absolute left-0"> <span
@@ -96,8 +107,8 @@
 
                 </div>
             </div>
-        </nav>
 
+        </nav>
 
         @yield('main')
 
@@ -125,7 +136,7 @@
                     class="text-black font-medium hover:text-[#c3ba57] w-fit hover:translate-y-1 hover:bg-black p-1 rounded-full transition-all duration-200  ">Portofolio</a>
                 <a href="{{ route('catal.index') }}"
                     class="text-black font-medium hover:text-[#c3ba57] w-fit hover:translate-y-1 hover:bg-black p-1 rounded-full transition-all duration-200  ">Shop</a>
-                <a href="/home"
+                <a href="{{ route('forum.index') }}"
                     class="text-black font-medium hover:text-[#c3ba57] w-fit hover:translate-y-1 hover:bg-black p-1 rounded-full transition-all duration-200  ">Discussion</a>
 
             </div>

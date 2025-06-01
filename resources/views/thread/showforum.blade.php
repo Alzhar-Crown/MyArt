@@ -34,7 +34,7 @@
                     <div class="  h-fit w-[30%] text-[12px]">{{ $item->body }}</div>
                     <div class="  h-fit w-[20%] text-[14px]">
                         {{ $item->user->profil->nama_depan . $item->user->profil->nama_belakang }}</div>
-                    <img class="  h-fit object-cover w-[20%] font-bold text-[10px] rounded-full"
+                    <img class="   object-cover w-[20%] h-[40px] font-bold text-[10px] rounded-full"
                         src="{{ asset('client/' . $item->user->profil->foto_profil) }} "></img>
 
                     </a>

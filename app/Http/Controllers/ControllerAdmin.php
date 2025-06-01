@@ -7,6 +7,7 @@ use App\Models\Portofolio;
 use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerAdmin extends Controller
 {
@@ -117,6 +118,12 @@ class ControllerAdmin extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $user = User::find(Auth::id());
+        $user->username = $request['username'];
+        $user->password = $request['password'];
+        $user->save();
+        return redirect()->back()->with('success','Data diubah');
+
     }
 
     /**

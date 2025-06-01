@@ -15,6 +15,7 @@ class ControllerSearch extends Controller
     //
     public function search(Request $request)
     {
+
         if (Str::contains($request['search_input'], '@')) {
             session()->forget('dataCatalog');
             session()->forget('nd');
@@ -36,9 +37,49 @@ class ControllerSearch extends Controller
                 return view('people-profil', compact('profil'));
             }
         } else {
-            return redirect()->back();
+            $input = explode(" ", Str::lower($request['search_input']));
+            $data = Catalog::where('status', '<>', 'sold')->where(function ($q) use ($input) {
+                foreach ($input as $kw) {
+                    $q->where('kategori_desain', 'LIKE', "%{$kw}%");
+                }
+            })->get();
+
+            // dd($data);
+
+
+            // Ambil user_id unik dari catalog hasil pencarian
+            $userIds = $data->pluck('user_id')->unique();
+
+            // Ambil semua portofolio user terkait (collection)
+            $portofolios = Portofolio::where(function ($q) use ($input) {
+                foreach ($input as $kw) {
+                    $q->where('kategori_desain', 'LIKE', "%{$kw}%");
+                }
+            })->get();
+            session(['previous_url' => url()->previous()]);
+            if ($data->isEmpty() && $portofolios->isEmpty()) {
+                return $this->indexsearch();
+            }
+
+            return view('searchShow', compact('data', 'portofolios'));
+
+
+
+
+            //belum selesai
+            // foreach($olahInput as $item)
         }
     }
+
+
+
+    public function indexsearch()
+    {
+        return view('searchShow');
+    }
+
+
+
     public function ClearProfil()
     {
         $profil = Profil::where('nama_depan', session('nd')['nama_depan'])->first();
@@ -73,23 +114,22 @@ class ControllerSearch extends Controller
     }
     public function shows($id)
     {
-        $profil = Profil::where('user_id',$id)->first();
+        $profil = Profil::where('user_id', $id)->first();
         $portofolio = Portofolio::where('user_id', $id)->get();
-            // dd($portofolio);
-            if ($portofolio->isNotEmpty()) {
-                session()->put('dataPortofolio', [
-                    'user_id' => Auth::id(),
-                ]);
-                session()->put('nd', [
-                    'nama_depan' => $profil->nama_depan,
-                ]);
-                return view('people-profil', compact('profil', 'portofolio'));
-            } else {
-                return view('people-profil', compact('profil'));
-            }
-
+        // dd($portofolio);
+        if ($portofolio->isNotEmpty()) {
+            session()->put('dataPortofolio', [
+                'user_id' => Auth::id(),
+            ]);
+            session()->put('nd', [
+                'nama_depan' => $profil->nama_depan,
+            ]);
+            return view('people-profil', compact('profil', 'portofolio'));
+        } else {
+            return view('people-profil', compact('profil'));
+        }
     }
-     public function showitem(string $id)
+    public function showitem(string $id)
     {
         $catal = Catalog::where('id', $id)->first();
         if ($catal->status == 'sold') {
@@ -99,9 +139,10 @@ class ControllerSearch extends Controller
         //
     }
 
-    
-    public function portows (string $id){
+
+    public function portows(string $id)
+    {
         $porto = Portofolio::where('id', $id)->first();
         return view('showpeopleP', compact('porto'));
     }
-}  
+}

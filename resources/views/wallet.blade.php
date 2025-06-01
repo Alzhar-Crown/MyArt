@@ -28,7 +28,7 @@
             </div>
 
             <div class=" flex flex-row mx-auto gap-2  w-fit">
-                <div class="flex h-[100%] overflow-y-auto  w-fit flex-col scrollbar-hide">
+                <div class="flex h-[50vh] overflow-y-auto  w-fit flex-col scrollbar-hide">
                     <h2 class="text-black font-bold">Outflow Spending</h2>
                     @if ($ordered->count() > 0)
                         @foreach ($ordered as $key => $item)

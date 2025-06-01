@@ -65,13 +65,10 @@
 
             </div>
 
-            @if ($errors->any())
-                <div class ="alert alert-danger" style="margin-left:-23px">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li style="color:white; font-size:17px">{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            @if ($errors->has('catalog_image'))
+                <div class ="alert alert-danger" >
+                    <li style="color:black; font-size:17px">{{ $errors->first('catalog_image') }}</li>
+
                 </div>
             @endif
             <div class="flex flex-row ml-[550px]">
