@@ -33,6 +33,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Wallet::class);
     }
+    public function wd()
+    {
+        return $this->hasOne(Wd::class);
+    }
     public function portofolio()
     {
         return $this->hasMany(Portofolio::class);

@@ -19,28 +19,28 @@ class ControllerCatalog extends Controller
      */
     public function index()
     {
-        //
-        $porto = Catalog::where('status', '<>', 'sold')->get();
+            //
+            $porto = Catalog::where('status', '<>', 'sold')->get();
 
-        $categorized = [
-            'uiux' => [],
-            'realpic' => [],
-            '2d' => [],
-            '3d' => [],
-        ];
+            $categorized = [
+                'uiux' => [],
+                'realpic' => [],
+                '2d' => [],
+                '3d' => [],
+            ];
 
-        foreach ($porto as $item) {
-            switch ($item->kategori_desain) {
-                case 'ui/ux':
-                    $categorized['uiux'][] = $item;
-                    break;
-                case 'realpic':
-                    $categorized['realpic'][] = $item;
-                    break;
-                case '2d illustration':
-                    $categorized['2d'][] = $item;
-                    break;
-                case '3d illustration':
+            foreach ($porto as $item) {
+                switch ($item->kategori_desain) {
+                    case 'uiux':
+                        $categorized['uiux'][] = $item;
+                        break;
+                    case 'realpic':
+                        $categorized['realpic'][] = $item;
+                        break;
+                    case '2d illustration':
+                        $categorized['2d'][] = $item;
+                        break;
+                    case '3d illustration':
                     $categorized['3d'][] = $item;
                     break;
             }
@@ -173,7 +173,7 @@ class ControllerCatalog extends Controller
         $catalog->preview = $namaPreview;
         $catalog->file_desain = $namaFile;
         $catalog->save();
-        return redirect()->route('clearCatalog');
+        return redirect()->route('clearCatalog')->with('success',true);
         //
     }
 
@@ -222,7 +222,7 @@ class ControllerCatalog extends Controller
             ->color('green');
 
 
-        return view('selling', compact('data', 'total', 'omset', 'omsetBulan', 'penjualan', 'all'));
+        return view('selling', compact('data', 'total', 'omset', 'omsetPerMonth',  'all','bulan','aem'));
     }
 
 
@@ -317,11 +317,12 @@ class ControllerCatalog extends Controller
     {
         session()->forget('dataPortofolio');
         $catalog = Catalog::where('user_id', Auth::id())->get();
+        $success = session('success')?: false;
         session()->put('dataCatalog', [
             'user_id' => Auth::id(),
         ]);
-
-        return view('profil', compact('catalog'));
+        
+        return view('profil', compact('catalog','success'));
     }
 
     /**

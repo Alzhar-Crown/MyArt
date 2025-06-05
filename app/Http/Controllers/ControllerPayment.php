@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wallet;
 use App\Models\Order;
 use App\Models\Ordered;
+use App\Models\Wd;
 use Carbon\Carbon;
 use Xendit\Configuration;
 use Xendit\Invoice\InvoiceApi;
@@ -14,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xendit\Invoice\CreateInvoiceRequest;
+// use Xendit\Model\CreateDisbursementRequest;
+
 use Xendit\Xendit;
 
 
@@ -173,23 +176,7 @@ class ControllerPayment extends Controller
 
         // 6) Tampilkan view wallet sekali saja
         $wallet = Wallet::where('user_id', Auth::id())->first();
-        $chart  = $this->makeWalletChart();
-
-        $data = Ordered::where('user_id', Auth::id())->get();
-        $ordered = Ordered::where('user_id', Auth::id())->get();
-        $topup = Order::where('user_id', Auth::id())->get();
-        $wallet = Wallet::where('user_id', Auth::id())->first();
-
-        $spending = $data->sum('harga');
-
-
-
-        return view('wallet', compact('wallet','topup','ordered','spending', 'chart'));
-    }
-
-    // contoh helper untuk chart
-    protected function makeWalletChart(): Chart
-    {
+        // $chart  = $this->makeWalletChart();
         $data = Ordered::where('user_id', Auth::id())->get();
         $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         $aem = array_fill(0, 12, 0);
@@ -201,13 +188,68 @@ class ControllerPayment extends Controller
                 $aem[$index] += $item->harga;
             }
         }
-        // Buat chart
-        $chart = new Chart;
-        $chart->labels($bulan);
-        $chart->dataset('Total Pengeluaran', 'bar', $aem)
-            ->backgroundColor('yellow')
-            ->color('yellow');
+        
+        $ordered = Ordered::where('user_id', Auth::id())->get();
+        // $topup = Order::where('user_id', Auth::id())->get();
+        $wallet = Wallet::where('user_id', Auth::id())->first();
+        // $ordered = Ordered::where('user_id', Auth::id())->latest()->get();
+        $wd = Wd::where('user_id',Auth::id())->latest()->get();
+        $topup = Order::where('user_id', Auth::id())->latest()->get();
 
-        return $chart;
+        $outflow = [
+            "spending" => $ordered,
+            "wd" => $wd
+        ];
+
+        $spending = $data->sum('harga');
+
+
+
+        return view('wallet', compact('wallet', 'topup', 'ordered', 'spending', 'bulan','aem','outflow'));
     }
+
+    // protected function makeWalletChart(): Chart
+    // {
+    //     $data = Ordered::where('user_id', Auth::id())->get();
+    //     $bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    //     $aem = array_fill(0, 12, 0);
+
+    //     foreach ($data as $item) {
+    //         $bulanStr = Carbon::parse($item->created_at)->format('M');
+    //         $index = array_search($bulanStr, $bulan);
+    //         if ($index !== false) {
+    //             $aem[$index] += $item->harga;
+    //         }
+    //     }
+    //     // Buat chart
+    //     $chart = new Chart;
+    //     $chart->labels($bulan);
+    //     $chart->dataset('Total Pengeluaran', 'bar', $aem)
+    //         ->backgroundColor('yellow')
+    //         ->color('yellow');
+
+    //     return $aem;
+    // }
+
+    // public function withdraw()
+    // {
+
+    //     try {
+    //         $disbursement = new CreateDisbursementRequest([
+    //             'external_id' => 'withdrawal-' . uniqid(),
+    //             'amount' => 100000, // nominal penarikan
+    //             'bank_code' => 'BCA',
+    //             'account_holder_name' => 'ALZHAR',
+    //             'account_number' => '1234567890',
+    //             'description' => 'Withdraw saldo user ke rekening'
+    //         ]);
+
+    //         // Simpan ke database
+    //         // Withdraw::create([...])
+
+    //         return response()->json($disbursement);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()]);
+    //     }
+    // }
 }

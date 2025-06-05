@@ -41,16 +41,7 @@
                 </div>
 
                 <div class="flex flex-row justify-between gap-4">
-                    <div class="flex flex-row gap-2">
-                        <button> <span class="material-symbols-outlined text-[40px] text-black">
-                                bookmark
-                        </button> </span>
-                        <button> <span class="material-symbols-outlined text-black">
-                                favorite
-                        </button> </span>
-
-
-                    </div>
+                        
 
                     <div class="w-fit h-[20px]  mt-4  flex flex-row justify-center items-center">
                         <form class="border p-1 rounded-sm" method="POST" action="{{ route('store.cart') }}">

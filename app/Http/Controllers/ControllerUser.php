@@ -222,7 +222,7 @@ class ControllerUser extends Controller
             $user->save();
             session()->flash('success', 'Data has been updated successfully!');
 
-            return redirect()->route('profil.create');
+            return redirect()->route('profil.create');  
         } else {
             $user = user::find($id);
             $user->username = $request['username'];

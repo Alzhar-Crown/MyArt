@@ -24,7 +24,7 @@ class ControllerPortofolio extends Controller
         ];
         foreach ($porto as $item) {
             switch ($item->kategori_desain) {
-                case 'ui/ux':
+                case 'uiux':
                     $categorized['uiux'][] = $item;
                     break;
                 case 'typhografi':
@@ -84,7 +84,7 @@ class ControllerPortofolio extends Controller
         $portofolio->kategori_desain = $request['kategori_desain'];
         $portofolio->preview = $namaFile;
         $portofolio->save();
-        return redirect()->route('clearProfil');
+        return redirect()->route('clearProfil')->with('success',true);
     }
 
     public function ClearProfil()
@@ -94,8 +94,9 @@ class ControllerPortofolio extends Controller
         session()->put('dataPortofolio', [
             'user_id' => Auth::id(),
         ]);
+        $success= session('success')?:false;
 
-        return view('profil', compact('portofolio'));
+        return view('profil', compact('portofolio','success'));
     }
 
     /**

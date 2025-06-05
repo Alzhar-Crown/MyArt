@@ -51,7 +51,7 @@
                 <div class ="alert alert-danger" style="margin-left:-23px">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li style="color:white; font-size:17px">{{ $error }}</li>
+                            <li style="color:red;margin-left:20px; font-size:17px">{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>

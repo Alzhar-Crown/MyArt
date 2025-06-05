@@ -17,6 +17,8 @@ class ControllerOrdered extends Controller
         $ordered = Ordered::where('user_id', Auth::id())->get();
         $total = Ordered::where('user_id', Auth::id())->count();
         $nom = $ordered->sum('harga');
+        session()->reflash();
+
 
 
 

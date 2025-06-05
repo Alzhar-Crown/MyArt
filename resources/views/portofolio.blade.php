@@ -81,7 +81,7 @@
             <div class="flex flex-row justify-between">
                 <h2 class="text text-black font-bold ml-6 mt-10 mb-3">UI/UX Design</h2>
                 <form class="text text-black font-bold mr-6 mb-3 mt-10"
-                    action="{{ route('Sporto', ['kategori' => 'ui/ux']) }}" method="POST">
+                    action="{{ route('Sporto', ['kategori' => 'uiux']) }}" method="POST">
                     @csrf
                     <button type="submit">Show more</button>
                 </form>

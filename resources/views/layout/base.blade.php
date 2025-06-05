@@ -17,6 +17,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/theme/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/theme/dist/css/adminlte.min.css">
+
+
+    <script src="{{ asset('theme/plugins/chart.js/Chart.min.js') }}"></script>
+
+    <!-- jQuery -->
+    <script src="{{ asset('theme/plugins/jquery/jquery.min.js') }}"></script>
     <style>
         #alzhar img {}
 
@@ -224,27 +230,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                
+
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.index')}}" class="nav-link">
+                                    <a href="{{ route('home.admin') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Home</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Management Akun</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('index.profil')}}" class="nav-link">
+                                    <a href="{{ route('index.profil') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Management Profil</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('index.porto')}}" class="nav-link">
+                                    <a href="{{ route('index.porto') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Management Portofolio</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('index.catalog')}}" class="nav-link">
+                                    <a href="{{ route('index.catalog') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Management Catalog</p>
                                     </a>
@@ -272,11 +284,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Management Account</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home.admin') }}">Home</a></li>
                                 <li class="breadcrumb-item active">Starter Page</li>
                             </ol>
                         </div><!-- /.col -->
@@ -284,9 +295,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+            <!-- REQUIRED SCRIPTS -->
+            <!-- Bootstrap 4 -->
+            <script src="{{ asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <!-- AdminLTE App -->
+            <script src="{{ asset('theme/dist/js/adminlte.min.js') }}"></script>
 
             <!-- Main content -->
-            <card class="main">
+            <card class="main" style="width:100vh;overflow-hidden">
                 @yield('main')
 
 
@@ -304,14 +320,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- ./wrapper -->
 
-        <!-- REQUIRED SCRIPTS -->
-
-        <!-- jQuery -->
-        <script src="{{ asset('theme/plugins/jquery/jquery.min.js') }}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ asset('theme/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ asset('theme/dist/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>

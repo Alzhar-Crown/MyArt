@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('_user')->onDelete('cascade');
             $table->string('nama_depan',30);
             $table->longText('preview');
+            $table->longText('preceptual_hash');
             $table->longText('deskripsi');
             $table->integer('harga');
             $table->string('headline',50);

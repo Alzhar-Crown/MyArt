@@ -10,17 +10,25 @@
 
                 <div class="flex flex-row gap-4">
                     <label class="text-black">Preview :</label>
-                    <input class="rounded-sm border-none shadow-md bg-white border border-black text-black" type="file"
-                        name="preview" accept="image/*" onchange="previewImage(event)" required>
+                    <div class="flex flex-col ">
+                        <input class="rounded-sm border-none shadow-md bg-white border border-black text-black"
+                            type="file" name="preview" accept="image/*" onchange="previewImage(event)" required>
+                        <label for="fileInput" class="text-[9px]">Files must be in jpeg, png, jpg, gif, webp format and a
+                            maximum size of 2000kb</label>
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col gap-3 mt-5 w-fit">
 
                 <div class="flex flex-row gap-4">
                     <label class="text-black">File Design:</label>
+                    <div class="flex flex-col ">
+                        <input class="rounded-sm border-none shadow-md bg-white border border-black text-black"
+                            type="file" name="file_desain" accept="image/*" required>
+                        <label for="fileInput" class="text-[9px]">Files must be in jpeg, png, jpg, gif, webp format and a
+                            maximum size of 50000kb</label>
+                    </div>
 
-                    <input class="rounded-sm border-none shadow-md bg-white border border-black text-black" type="file"
-                        name="file_desain" accept="image/*" required>
                 </div>
             </div>
 
@@ -36,8 +44,14 @@
             <div class="flex flex-row gap-3  w-fit">
                 <div>
                     <label class="text-black ">Description :</label>
-                    <textarea class="rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3" type="textarea"
-                        name="deskripsi" required></textarea>
+                    <div class="flex flex-col ">
+                        <textarea class="rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3" type="textarea"
+                            name="deskripsi" required></textarea>
+
+                        <label for="fileInput" class="file-input text-[9px] ml-7">
+                            Maximum character 200</label>
+                    </div>
+
                 </div>
 
             </div>
@@ -55,7 +69,7 @@
                     <select id="kategori" name="kategori_desain"
                         class="w-full px-4 bg-white text-black py-2 border rounded" required>
                         <option value="">-- Pilih Kategori --</option>
-                        <option value="ui/ux">Ui/Ux Design</option>
+                        <option value="uiux">Ui/Ux Design</option>
                         <option value="realpic">Real Picture</option>
                         <option value="2d illustration">2D Illustration</option>
                         <option value="3d illustration">3D Illustration</option>
@@ -65,10 +79,20 @@
 
             </div>
 
-            @if ($errors->has('catalog_image'))
-                <div class ="alert alert-danger" >
+            {{-- @if ($errors->has('catalog_image'))
+                <div class ="alert alert-danger">
                     <li style="color:black; font-size:17px">{{ $errors->first('catalog_image') }}</li>
 
+                </div>
+            @endif --}}
+            @if ($errors->any())
+                <div class =" bg-white" style="">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li style="color:red; background-color:white; font-medium uppercase w-fit font-size:17px">
+                                {{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
             <div class="flex flex-row ml-[550px]">

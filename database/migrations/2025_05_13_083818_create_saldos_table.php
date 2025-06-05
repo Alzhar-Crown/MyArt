@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('_user');
-            $table->decimal('saldo', 15, 2);
+            $table->decimal('saldo', 15, 2)->default(0);
+            $table->integer('spending')->default(0);
             $table->timestamps();
         });
     }

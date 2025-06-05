@@ -141,7 +141,7 @@
     </div>
     <div class="trending">
         <div class="flex flex-row justify-between">
-            <h2 class="text text-black font-bold ml-6 mt-10 mb-3">Trending Portofolio Of the Year</h2>
+            <h2 class="text text-black font-bold ml-6 mt-10 mb-3">Trending Portofolio</h2>
             <form class="text text-black font-bold mr-6 mb-3 mt-10"
                 action="{{ route('scatal', ['kategori' => '3d illustration']) }}" method="POST">
                 @csrf
@@ -168,7 +168,11 @@
     <div class="3D Ilus">
         <div class="flex flex-row justify-between">
             <h2 class="text text-black font-bold ml-6 mt-10 mb-3">3D Illustration || Sale Product</h2>
-            <a href="#" class="text text-black font-bold mr-6 mb-3 mt-10">Show more</a>
+            <form class="text text-black font-bold mr-6 mb-3 mt-10"
+                action="{{ route('scatal', ['kategori' => '3d illustration']) }}" method="POST">
+                @csrf
+                <button type="submit">Show more</button>
+            </form>
         </div>
         <div class="overflow-x-auto scrollbar-hide  w-[96.5%] ml-6">
             <div class="grid grid-flow-col auto-cols-[calc(100%/6)]  ">
@@ -215,7 +219,7 @@
         <div class="flex flex-row justify-between">
             <h2 class="text text-black font-bold ml-6 mt-10 mb-3">UI UX Design || Sale Product</h2>
             <form class="text text-black font-bold mr-6 mb-3 mt-10"
-                action="{{ route('scatal', ['kategori' => 'ui/ux']) }}" method="POST">
+                action="{{ route('scatal', ['kategori' => 'uiux']) }}" method="POST">
                 @csrf
                 <button type="submit">Show more</button>
             </form>

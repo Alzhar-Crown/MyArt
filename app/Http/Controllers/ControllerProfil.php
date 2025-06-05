@@ -100,7 +100,7 @@ class ControllerProfil extends Controller
         //
         $request->validate([
             'foto_profil' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'deskripsi' => 'min:50|max:200'
+            'deskripsi' => 'min:20|max:200'
         ]);
         $profil = Profil::where('user_id', $id)->firstOrFail();;
         if (isset($request['foto_profil'])) {

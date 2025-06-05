@@ -41,16 +41,7 @@
                 </div>
 
                 <div class="flex flex-row justify-between gap-4">
-                    <div class="flex flex-row gap-2">
-                        <button> <span class="material-symbols-outlined text-[40px] text-black">
-                                bookmark
-                        </button> </span>
-                        <button> <span class="material-symbols-outlined text-black">
-                                favorite
-                        </button> </span>
-
-
-                    </div>
+                    
 
                     
                 </div>

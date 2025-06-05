@@ -1,19 +1,20 @@
 @extends('layout.base')
 @section('main')
-    <div class="card-body" style="height:70vh;overflow-x:auto; overflow-y: auto">
-        <table id="example1" class="table table-bordered table-striped ">
+    <div class="card-body " style="height:90vh;width:100%;overflow:auto;">
+        <table id="example1" class="table table-bordered table-striped text-sm" style="table-layout: fixed; width: 100%;">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Action</th>
                     <th>Id</th>
                     <th>User Id</th>
                     <th>First Name</th>
-                    <th>Preview</th>
+                    <th style="width: 80px; white-space: normal; word-wrap: break-word;">Preview</th>
                     <th>Deskripsi</th>
                     <th>Headline</th>
-                    <th>Jumlah_like</th>
-                    <th>Jumlah_simpan</th>
-                    <th>Kategori_desain</th>
+                    <th>Jumlah Like</th>
+                    <th style="width: 80px; white-space: normal; word-wrap: break-word;">Jumlah Simpan</th>
+                    <th>Kategori Desain</th>
                     <th>Peringkat</th>
                     <th>Tanggal Upload</th>
                     {{-- <th>Password</th> --}}
@@ -24,24 +25,24 @@
                 @foreach ($daftar_porto as $key => $item)
                     <tr>
                         <td>{{ $key + 1 }} </td>
-                        <td>{{ $item->id ?? 'empty'}}</td>
-                        <td>{{ $item->user_id ?? 'empty'}}</td>
-                        <td>{{ $item->nama_depan ?? 'empty'}}</td>
-                        <td>{{ $item->preview ?? 'empty'}}</td>
-                        <td>{{ $item->deskripsi ?? 'empty'}}</td>
-                        <td>{{ $item->headline ?? 'empty'}}</td>
-                        <td>{{ $item->jumlah_like ?? 'empty'}}</td>
-                        <td>{{ $item->jumlah_simpan ?? 'empty'}}</td>
-                        <td>{{ $item->kategori_desain ?? 'empty'}}</td>
-                        <td>{{ $item->peringkat ?? 'empty'}}</td>
-                        <td>{{ $item->created_at ?? 'empty'}}</td>
-                        <td>
+                        <td style=" white-space: normal; word-wrap: break-word;">
                             <form action="{{ route('destroy.porto', $item->id) }}" method="POST" style="display:inline;" id="delete-form-{{ $item->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $item->id }})" >Hapus</button>
                             </form>
                         </td>
+                        <td>{{ $item->id ?? 'empty'}}</td>
+                        <td>{{ $item->user_id ?? 'empty'}}</td>
+                        <td>{{ $item->nama_depan ?? 'empty'}}</td>
+                        <td  style=" white-space: normal; word-wrap: break-word;">{{ $item->preview ?? 'empty'}}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->deskripsi ?? 'empty'}}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->headline ?? 'empty'}}</td>
+                        <td>{{ $item->jumlah_like ?? 'empty'}}</td>
+                        <td>{{ $item->jumlah_simpan ?? 'empty'}}</td>
+                        <td>{{ $item->kategori_desain ?? 'empty'}}</td>
+                        <td>{{ $item->peringkat ?? 'empty'}}</td>
+                        <td>{{ $item->created_at ?? 'empty'}}</td>
                     </tr>
                 @endforeach
 

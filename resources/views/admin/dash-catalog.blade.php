@@ -1,11 +1,11 @@
 @extends('layout.base')
 @section('main')
-    <div class="card-body" style="height:70vh;overflow-x:auto; overflow-y: auto">
-        <table id="example1" class="table table-bordered table-striped">
+    <div class="card-body" style="height:70vh;width:100%;overflow-x:auto; overflow-y: auto">
+        <table id="example1" class="table table-bordered table-striped text-sm" style="table-layout: fixed; width: 100%;">
             <thead>
                 <tr>
-                    <th>Action</th>
                     <th>No</th>
+                    <th>Action</th>
                     <th>Id</th>
                     <th>User Id</th>
                     <th>First Name</th>
@@ -25,21 +25,21 @@
             <tbody class="w-fit">
                 @foreach ($daftar_catalog as $key => $item)
                     <tr>
-                        <td>
+                        <td>{{ $key + 1 }} </td>
+                        <td style=" white-space: normal; word-wrap: break-word;">
                             <form action="{{ route('destroy.catalog', $item->id) }}" method="POST" style="display:inline;" id="delete-form-{{ $item->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $item->id }})" >Hapus</button>
                             </form>
                         </td>
-                        <td>{{ $key + 1 }} </td>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->user_id }}</td>
                         <td>{{ $item->nama_depan }}</td>
-                        <td>{{ $item->preview}}</td>
-                        <td>{{ $item->file_desain }}</td>
-                        <td>{{ $item->headline }}</td>
-                        <td>{{ $item->deskripsi }}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->preview}}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->file_desain }}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->headline }}</td>
+                        <td style=" white-space: normal; word-wrap: break-word;">{{ $item->deskripsi }}</td>
                         <td>{{ $item->harga }}</td>
                         <td>{{ $item->status }}</td>
                         <td>{{ $item->kategori_desain }}</td>

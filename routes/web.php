@@ -72,6 +72,7 @@ Route::post('/login', [ControllerAdmin::class, 'login'])->name('admin.login');
 Route::get('/indexx', [ControllerAdmin::class, 'index'])->name('admin.index');
 Route::get('/logout', [ControllerAdmin::class, 'logOut'])->name('admin.logout');
 Route::get('/Ip', [ControllerAdmin::class, 'indexProfil'])->name('index.profil');
+Route::get('/home-admin', [ControllerAdmin::class, 'homeAdmin'])->name('home.admin');
 Route::get('/Ipor', [ControllerAdmin::class, 'indexPortofolio'])->name('index.porto');
 Route::get('/Ic', [ControllerAdmin::class, 'indexCatalog'])->name('index.catalog');
 Route::delete('/Dp/{id}', [ControllerAdmin::class, 'destroyProfil'])->name('destroy.profil');
@@ -120,6 +121,9 @@ Route::post('/scatal/{kategori}', [ControllerCatalog::class, 'scatal'])->name('s
 Route::get('/scatalndex', [ControllerCatalog::class, 'scatalndex'])->name('scatalndex');
 
 Route::resource('wallet', ControllerWallet::class);
+Route::post('/wd', [ControllerWallet::class, 'wd'])->name('wd');
+Route::get('/getwd', [ControllerWallet::class, 'getwd'])->name('getwd');
+
 
 Route::resource('cart', ControllerCart::class);
 Route::post('/cart+', [ControllerCart::class, 'store'])->name('store.cart');

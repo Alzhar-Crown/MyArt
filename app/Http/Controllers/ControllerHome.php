@@ -42,7 +42,7 @@ class ControllerHome extends Controller
 
         foreach ($catal as $item) {
             switch ($item->kategori_desain) {
-                case 'ui/ux':
+                case 'uiux':
                     $categorized['uiux'][] = $item;
                     break;
                 case 'realpic':

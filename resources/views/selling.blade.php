@@ -31,28 +31,68 @@
                 </div>
 
             </div>
-            <div class="text-black"></div>
-            <div class="text-black"></div>
+           
             <div class="text-black flex !flex-row gap-10">
                 <div class="text-black">
-                    <div class=" bg-transparent hover:bg-white transition-all duration-200  rounded-md shadow-xl p-2"
-                        style="width: 350px;height:350px; margin: none;">
-                        {!! $penjualan->container() !!}
+                    <div>
+                        <canvas id="productChart" class="h-[300px]"></canvas>
                     </div>
-
-                    {!! $penjualan->script() !!}
                 </div>
                 <div class="text-black">
-                    <div class=" bg-transparent hover:bg-white transition-all duration-200  rounded-md shadow-xl p-2"
-                        style="width: 350px;height:350px; margin: none;">
-                        {!! $omsetBulan->container() !!}
-                    </div>
-
-                    {!! $omsetBulan->script() !!}
+                        <canvas id="omsetChart" class="h-[300px]"></canvas>
                 </div>
 
             </div>
         </div>
 
     </div>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('productChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @json($bulan),
+                datasets: [{
+                    label: 'Product Sold',
+                    data: @json($aem),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        const cty = document.getElementById('omsetChart');
+
+        new Chart(cty, {
+            type: 'bar',
+            data: {
+                labels: @json($bulan),
+                datasets: [{
+                    label: 'Omset every Month',
+                    data: @json($omsetPerMonth),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

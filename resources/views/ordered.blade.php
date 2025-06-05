@@ -59,4 +59,16 @@
             </div>
         @endif
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success') == true)
+            Swal.fire({
+                title: "Purchase Success",
+                icon: "success",
+                draggable: true
+            });
+        @endif
+    </script>
+
 @endsection

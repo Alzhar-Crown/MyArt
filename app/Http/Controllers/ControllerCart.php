@@ -275,7 +275,7 @@ class ControllerCart extends Controller
 
         session()->forget('total');
 
-        return redirect()->route('ordered.index');
+        return redirect()->route('ordered.index')->with('success',true);
     }
 
     /**

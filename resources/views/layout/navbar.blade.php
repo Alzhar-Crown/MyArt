@@ -154,10 +154,7 @@
 
             </div>
         </footer>
-        <form method="POST" action="{{ route('user.logout') }}">
-            @csrf
-            <button type="submit" class="text-black">Logout</button>
-        </form>
+        
 
     </div>
     {{-- @if (session('dataProfil'))

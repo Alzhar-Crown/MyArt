@@ -100,7 +100,7 @@
             <div class="flex flex-wrap  gap-4 ">
                 @if (session('dataPortofolio'))
                     @foreach ($portofolio as $item)
-                        <a href="{{ route('porsow',['id'=>$item->id]) }}"
+                        <a href="{{ route('porsow', ['id' => $item->id]) }}"
                             class=" p-4 h-[250px] object-center  overflow-y-hidden object-cover w-[calc(100%/3-1rem)] mt-10"><img
                                 src="{{ asset('portofolio/' . $item->preview) }}"></img></a>
                     @endforeach
@@ -132,7 +132,32 @@
         </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        @if (!empty($success) && $success == true)
+            let timerInterval;
+            Swal.fire({
+                title: "Uploading Data!",
+                html: "I will close in <b></b> milliseconds.",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                        timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+            });
+        @endif
         const text = @json(session('dataProfil')['deskripsi'] ??
                 'Saya adalah salah satu designer ui/ux yang sudah berpengalaman selama 30 tahun');
 

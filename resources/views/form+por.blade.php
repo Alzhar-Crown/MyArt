@@ -1,17 +1,22 @@
 @extends('layout.navbar')
 @section('main')
     <div class=" h-fit   w-full">
-        <form class="aws mt-7 border w-fit flex flex-col gap-5  mx-auto p-5" action="{{ route('store.porto')}}" enctype="multipart/form-data" method="POST">
+        <form class="aws mt-7 border w-fit flex flex-col gap-5  mx-auto p-5" action="{{ route('store.porto') }}"
+            enctype="multipart/form-data" method="POST">
             @csrf
-            <img id="preview" alt="Preview"
-                class="w-fit h-[250px]  object-cover border-nonr mx-auto mt-2 border-black" />
+            <img id="preview" alt="Preview" class="w-fit h-[250px]  object-cover border-nonr mx-auto mt-2 border-black" />
 
             <div class="flex flex-col gap-3 mt-5 w-fit">
 
                 <div class="flex flex-row gap-4">
                     <label class="text-black">Preview :</label>
-                    <input class="rounded-sm border-none shadow-md bg-white border border-black text-black" type="file"
-                        id="profile_picture" name="preview" accept="image/*" onchange="previewImage(event)" required>
+                    <div class="flex flex-col ">
+                        <input class="rounded-sm border-none shadow-md bg-white border border-black text-black"
+                            type="file" id="profile_picture" name="preview" accept="image/*"
+                            onchange="previewImage(event)" required>
+                        <label for="fileInput" class="text-[9px]">Files must be in jpeg, png, jpg, gif, webp format and a
+                            maximum size of 10000kb</label>
+                    </div>
                 </div>
             </div>
 
@@ -20,22 +25,28 @@
                 <div>
                     <label class="text-black">Headline :</label>
                     <input class= "rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3"
-                        name="headline"   required>
+                        name="headline" required>
                 </div>
 
             </div>
             <div class="flex flex-row gap-3  w-fit">
                 <div>
                     <label class="text-black ">Description :</label>
-                    <textarea class="rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3" type="textarea"
-                        name="deskripsi" required></textarea>
+
+                    <div class="flex flex-col ">
+                        <textarea class="rounded-sm border-none bg-white border ml-7 shadow-md border-black text-black px-3" type="textarea"
+                            name="deskripsi" required></textarea>
+                        <label for="fileInput" class="text-[9px] ml-7">
+                            Maximum character 200</label>
+                    </div>
                 </div>
 
             </div>
             <div class="flex flex-row gap-3  w-fit">
                 <div>
                     <label class="text-black ">Category Design :</label>
-                    <select id="kategori" name="kategori_desain" class="w-full px-4 bg-white text-black py-2 border rounded" required>
+                    <select id="kategori" name="kategori_desain"
+                        class="w-full px-4 bg-white text-black py-2 border rounded" required>
                         <option value="">-- Pilih Kategori --</option>
                         <option value="ui/ux">Ui/Ux Design</option>
                         <option value="typhografi">Typhografi</option>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('_user')->onDelete('cascade');
             $table->string('nama_depan',30);
             $table->longText('preview');
-            $table->longText('deskripsi', );
+            $table->longText('deskripsi',);
             $table->string('headline',50);
             $table->integer('jumlah_like')->default(0);
             $table->integer('jumlah_simpan')->default(0);

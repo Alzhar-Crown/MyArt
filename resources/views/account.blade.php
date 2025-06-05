@@ -1,6 +1,6 @@
 @extends('layout.navbar')
 @section('main')
-    <div class="h-[98vh] w-full py-6 ">
+    <div class="h-[98vh] w-full py-6 flex flex-col justify-center ">
         <form id="act" class="mx-auto w-[50%] p-4 flex flex-col h-[90%] border gap-4 items-center "
             action ="{{ route('user.update', ['user' => Auth::id()]) }}" method="POST">
             @method('PUT')
@@ -36,6 +36,10 @@
                     class=" text-white w-fit h-fit p-2 bg-black text-sm rounded-lg hover:text-transparent hover:bg-clip-text transition-all duration-400 hover:translate-y-1 hover:bg-gradient-to-r font-light from-purple-400 via-pink-500 to-yellow-500 ">Back</a>
             </div>
         </form>
+        <form method="POST" id="lg" class="-translate-y-[290px] translate-x-[750px]" action="{{ route('user.logout') }}">
+            @csrf
+            <button type="submit" class="text-white w-fit h-fit p-2 rounded-md !bg-red-600">Logout</button>
+        </form>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -59,7 +63,7 @@
         });
     </script>
     <script>
-        @if (session('success'))
+        @if (session('succes'))
             let timerInterval;
             Swal.fire({
                 title: "Uploading Data!",
